@@ -111,8 +111,13 @@ export const AddProduct = () => {
         }
         else {
             setError({ n: null })
+            const headers = {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
             axios.post('https://stenotropic-falls.000webhostapp.com/product/add',
-                inputs
+                inputs,
+                {headers: headers}
             )
                 .then((res) => {
                     //console.log(res.data.message)
