@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { AddProduct } from './pages/AddProduct';
+import { Home } from './pages/Home';
+
+const Footer = () =>{
+  return(
+    <div className='absolute bottom-4 w-full text-lg text-center'>
+      <p>Scandiweb Test assignment</p>
+    </div>
+  )
+}
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/addproduct' element={<AddProduct/>}/>
+        </Routes>
+      </div>
+      </BrowserRouter>
+      <Footer/>
     </div>
   );
 }
