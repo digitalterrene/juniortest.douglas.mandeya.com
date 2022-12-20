@@ -7,11 +7,12 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     const [takenSKU, setTakenSKU] = useState([])
 
+    const PATH = 'https://junior-test-douglas-mandeya-com.000webhostapp.com/scandiweb'
     useEffect(() =>{
         getProducts()
     },[takenSKU])
     const getProducts = () => {
-        axios.get('https://stenotropic-falls.000webhostapp.com/products')
+        axios.get(`${PATH}/products`)
             .then((res) => {
                 //console.log(res.data)
                 const products = res.data

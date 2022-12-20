@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { NavLink,} from 'react-router-dom'
+import { NavLink, } from 'react-router-dom'
 
 
 
@@ -11,36 +11,40 @@ export const Home = () => {
     const [error, setError] = useState(null)
     const [successMsg, setSuccessMsg] = useState(null)
     const [prods, setProds] = useState(null)
-    const [products, setProducts] = useState()
+    const [inputs, setInputs] = useState({})
+    const [products, setProducts] = useState(null)
     const [productID, setProductID] = useState({
         deleteID: [],
         response: [],
     });
-
-    const headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-    }
+    const PATH = 'https://junior-test-douglas-mandeya-com.000webhostapp.com/scandiweb'
 
     const onSubmitt = () => {
         const IDS = document.getElementById('textarea').value
         //console.log({IDS})
-        if(IDS === ''){
+        if (IDS === '') {
             setError('Please selected at least 1 product to delete!')
         }
-        else{
-            axios.delete(`https://stenotropic-falls.000webhostapp.com/products/delete`, { data: { id: IDS } },
-            {headers: headers})
-            .then((res) => {
-                setSuccessMsg('Product(s) deleted successfully')
-                setTimeout(()=>{
-                    document.location.reload()
-                },500)
-            })
+        else {
+            let options = {
+                method: 'POST',
+                body: JSON.stringify(IDS),
+            }
+            fetch(`${PATH}/products/delete`,
+                options)
+                .then(res =>
+                    res.json()).then(d => {
+                        //setSuccessMsg(d.message)
+                        //document.location.reload()
+                    }).catch((err) => {
+                        setSuccessMsg('Product(s) deleted successfully!')
+                            document.location.reload()
+                    })
+
             setError(null)
         }
     }
-    
+
     const handleChange1 = (e) => {
         // Destructuring
         const { value, checked } = e.target;
@@ -70,19 +74,15 @@ export const Home = () => {
     useEffect(() => {
         getProducts()
     }, [])
-
     const getProducts = () => {
-        axios.get('https://stenotropic-falls.000webhostapp.com/products',
-        {headers: headers})
-            .then((res) => {
-                setProducts(res.data)
-                const entries = Object.entries(products);
-                setProds(entries)
+        fetch(`${PATH}/products`)
+            .then(response => response.json())
+            .then(data => {
+                setProducts(data)
+                console.log(data)
+            });
 
-            })
     }
-
-
 
     const Header = () => {
 
@@ -113,7 +113,7 @@ export const Home = () => {
             {error && <p className='text-center text-2xl text-red-500'>{error}</p>}
             {successMsg && <p className='text-center text-2xl text-green-500'>{successMsg}</p>}
             {!successMsg && <div className='px-20 flex flex-wrap justify-center'>
-                {prods && prods.map((p, i) => (
+                {products && products.map((p, i) => (
                     <div
                         key={i}
                         className='border m-8 h-44 w-64 p-4'

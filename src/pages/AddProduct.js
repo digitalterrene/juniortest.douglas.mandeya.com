@@ -18,6 +18,7 @@ export const AddProduct = () => {
     const [successMsg, setSuccessMsg] = useState(null)
     const [error, setError] = useState({ n: null })
     const navigate = useNavigate()
+    const PATH = 'https://junior-test-douglas-mandeya-com.000webhostapp.com/scandiweb'
 
     //UPDATING STATE CHANGES FOR THE INPUTS
     const handleChange = (event) => {
@@ -111,21 +112,21 @@ export const AddProduct = () => {
         }
         else {
             setError({ n: null })
-            const headers = {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+            //console.log(inputs)
+            let options = {
+                method: 'POST',
+                body: JSON.stringify(inputs)
             }
-            axios.post('https://stenotropic-falls.000webhostapp.com/product/add',
-                inputs,
-                {headers: headers}
-            )
-                .then((res) => {
-                    //console.log(res.data.message)
-                    setSuccessMsg(res.data.message)
-                    setTimeout(() => {
-                        navigate('/')
-                    }, 500)
-                })
+            fetch(`${PATH}/product/add`,
+                options)
+                .then(res =>
+                    res.json()).then(d => {
+                        console.log(d)
+                        setSuccessMsg(d.message)
+                        setTimeout(() => {
+                            navigate('/')
+                        }, 500)
+                    })
         }
 
 
