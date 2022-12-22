@@ -18,7 +18,7 @@ export const ContextProvider = ({ children }) => {
         fetch(`${PATH}/products`,options)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 const products = data
                 let pros = []
                 products.forEach(p => {
