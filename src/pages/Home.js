@@ -1,5 +1,4 @@
 
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink, } from 'react-router-dom'
 
@@ -17,7 +16,7 @@ export const Home = () => {
         deleteID: [],
         response: [],
     });
-    const PATH = 'https://junior-test-douglas-mandeya-com.000webhostapp.com/scandiweb'
+    const PATH = 'https://juniortest-douglas-mandeya-com.herokuapp.com/scandiweb'
 
     const onSubmitt = () => {
         const IDS = document.getElementById('textarea').value
@@ -29,6 +28,7 @@ export const Home = () => {
             let options = {
                 method: 'POST',
                 body: JSON.stringify(IDS),
+                mode:'cors'
             }
             fetch(`${PATH}/products/delete`,
                 options)
@@ -75,11 +75,15 @@ export const Home = () => {
         getProducts()
     }, [])
     const getProducts = () => {
+        let options = {
+            method: 'GET',
+            mode:'cors'
+        }
         fetch(`${PATH}/products`)
             .then(response => response.json())
             .then(data => {
                 setProducts(data)
-                console.log(data)
+                //console.log(data)
             });
 
     }

@@ -1,21 +1,25 @@
 import React, { createContext, useContext,useEffect, useState } from 'react'
-import axios from 'axios';
+
 
 const StateContext = createContext();
 
 
 export const ContextProvider = ({ children }) => {
     const [takenSKU, setTakenSKU] = useState([])
-
-    const PATH = 'https://junior-test-douglas-mandeya-com.000webhostapp.com/scandiweb'
+    let options = {
+        method: 'GET',
+        mode:'cors'
+    }
+    const PATH = 'https://juniortest-douglas-mandeya-com.herokuapp.com/scandiweb'
     useEffect(() =>{
         getProducts()
     },[takenSKU])
     const getProducts = () => {
-        axios.get(`${PATH}/products`)
-            .then((res) => {
-                //console.log(res.data)
-                const products = res.data
+        fetch(`${PATH}/products`,options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const products = data
                 let pros = []
                 products.forEach(p => {
                     pros.push(p.sku)
@@ -23,7 +27,7 @@ export const ContextProvider = ({ children }) => {
                     //console.log(takenSKU)
                 });
 
-            })
+            });
     }
     return (
         <StateContext.Provider

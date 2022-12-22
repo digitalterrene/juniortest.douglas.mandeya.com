@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate, } from 'react-router-dom'
 import Select from 'react-select'
@@ -18,7 +18,7 @@ export const AddProduct = () => {
     const [successMsg, setSuccessMsg] = useState(null)
     const [error, setError] = useState({ n: null })
     const navigate = useNavigate()
-    const PATH = 'https://juniortest-douglas-mandeya-com.herokuapp.com/scandiweb'
+    const PATH = 'https://stenotropic-falls.000webhostapp.com/scandiweb'
 
     //UPDATING STATE CHANGES FOR THE INPUTS
     const handleChange = (event) => {
@@ -112,16 +112,15 @@ export const AddProduct = () => {
         }
         else {
             setError({ n: null })
-            //console.log(inputs)
+            console.log(inputs)
             let options = {
                 method: 'POST',
-                body: JSON.stringify(inputs)
+                body: JSON.stringify(inputs),
             }
             fetch(`${PATH}/product/add`,
                 options)
                 .then(res =>
                     res.json()).then(d => {
-                        console.log(d)
                         setSuccessMsg(d.message)
                         setTimeout(() => {
                             navigate('/')
