@@ -22,7 +22,7 @@ export const Home = () => {
         const IDS = document.getElementById('textarea').value
         //console.log({IDS})
         if (IDS === '') {
-            setError('Please selected at least 1 product to delete!')
+            setError('Please select at least 1 product to delete!')
         }
         else {
             let options = {
@@ -112,7 +112,21 @@ export const Home = () => {
     return (
         <div>
             <div>
-                <Header />
+              <div className='flex justify-between px-20 my-8 border-b pb-4'>
+                <NavLink to={'/'}>
+                    <h1 className='text-2xl'>
+                        Product List
+                    </h1>
+                </NavLink>
+                <div>
+                    <NavLink to={'addproduct'}>
+                        <button className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>Add</button>
+                    </NavLink>
+                    <NavLink>
+                        <button id='delete-product-btn' onClick={onSubmitt} className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>Mass Delete</button>
+                    </NavLink>
+                </div>
+            </div>
             </div>
             {error && <p className='text-center text-2xl text-red-500'>{error}</p>}
             {successMsg && <p className='text-center text-2xl text-green-500'>{successMsg}</p>}
