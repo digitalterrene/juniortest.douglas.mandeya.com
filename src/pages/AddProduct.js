@@ -28,8 +28,16 @@ export const AddProduct = () => {
     }
 
     //MONITORING AND UPDATING THE SELECT TAG (REACT-SELECT)
-    function getValue(productType) {
-        setTypeSwitcher(productType.value)
+    const selectElement = document.querySelector('#productType');
+
+    function getValue() {
+        setTypeSwitcher(selectElement.value);
+        //console.log({selectElement})
+        //console.log({typeSwitcher})
+        //setTypeSwitcher(productType.value)
+        //productType
+
+        //document.querySelector('.output').textContent = output;
     }
 
     //FORMTTING THE INPUT FIELDS ON CANCEL
@@ -171,25 +179,7 @@ export const AddProduct = () => {
     return (
         <div>
             <div>
-            <div className='flex justify-between px-20 my-8 border-b pb-4'>
-                <NavLink to={'/'}>
-                    <h1 className='text-2xl'>
-                        Product Add
-                    </h1>
-                </NavLink>
-                <div>
-                    <NavLink to={'addproduct'} className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
-                        <button onClick={handleSubmit} type='submit' >
-                            Save
-                        </button>
-                    </NavLink>
-                    <NavLink className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
-                        <button onClick={handleCancel} >
-                            Cancel
-                        </button>
-                    </NavLink>
-                </div>
-            </div>
+                <Header />
                 {successMsg && <p className='text-center text-2xl text-green-500'>{successMsg}</p>}
             </div>
             {!successMsg && <div className='px-20'>
@@ -209,8 +199,14 @@ export const AddProduct = () => {
                     </span>
                     <span className='my-4 flex justify-between'>
                         <label>Type Switcher</label>
-                        <Select id='productType' onChange={getValue} options={options} name='productType' />
+                        <select onChange={getValue} name="productType" id="productType">
+                            <option value=""></option>
+                            <option value="dvd">DVD</option>
+                            <option value="book">Book</option>
+                            <option value="furniture">Furniture</option>
+                        </select>
                     </span>
+
                     <div id='optional'>
                         {typeSwitcher === 'dvd' &&
                             <div>
