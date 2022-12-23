@@ -141,7 +141,7 @@ export const Home = () => {
                             <div className='relative flex justify-between -top-2 left-4'>
                                 <input
                                     type="checkbox"
-                                    className='delete-checkbox'
+                                    class='delete-checkbox'
                                     value={`${p.id}`}
                                     onChange={handleChange1}
                                 />
