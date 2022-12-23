@@ -119,11 +119,11 @@ export const Home = () => {
                     </h1>
                 </NavLink>
                 <div>
-                    <NavLink to={'addproduct'}>
-                        <button className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>Add</button>
+                    <NavLink to={'addproduct'} className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
+                        <button >ADD</button>
                     </NavLink>
-                    <NavLink>
-                        <button id='delete-product-btn' onClick={onSubmitt} className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>Mass Delete</button>
+                    <NavLink className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
+                        <button id='delete-product-btn' onClick={onSubmitt} >MASS DELETE</button>
                     </NavLink>
                 </div>
             </div>
