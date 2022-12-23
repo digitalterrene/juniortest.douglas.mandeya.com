@@ -5,7 +5,7 @@ import Select from 'react-select'
 import { useStateContext } from '../contexts/ContextProvider'
 
 const options = [
-    { value: 'dvd', label: 'DVD-disc' },
+    { value: 'dvd', label: 'DVD' },
     { value: 'book', label: 'Book' },
     { value: 'furniture', label: 'Furniture' }
 ]
@@ -171,7 +171,25 @@ export const AddProduct = () => {
     return (
         <div>
             <div>
-                <Header />
+            <div className='flex justify-between px-20 my-8 border-b pb-4'>
+                <NavLink to={'/'}>
+                    <h1 className='text-2xl'>
+                        Product Add
+                    </h1>
+                </NavLink>
+                <div>
+                    <NavLink to={'addproduct'} className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
+                        <button onClick={handleSubmit} type='submit' >
+                            Save
+                        </button>
+                    </NavLink>
+                    <NavLink className='uppercase mx-4 bg-gray-300 px-4 py-1 hover:bg-blue-600 hover:text-white hover:font-bold'>
+                        <button onClick={handleCancel} >
+                            Cancel
+                        </button>
+                    </NavLink>
+                </div>
+            </div>
                 {successMsg && <p className='text-center text-2xl text-green-500'>{successMsg}</p>}
             </div>
             {!successMsg && <div className='px-20'>
@@ -191,7 +209,7 @@ export const AddProduct = () => {
                     </span>
                     <span className='my-4 flex justify-between'>
                         <label>Type Switcher</label>
-                        <Select onChange={getValue} options={options} name='productType' />
+                        <Select id='productType' onChange={getValue} options={options} name='productType' />
                     </span>
                     <div id='optional'>
                         {typeSwitcher === 'dvd' &&
