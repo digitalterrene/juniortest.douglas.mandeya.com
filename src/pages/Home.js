@@ -149,7 +149,6 @@ export const Home = () => {
                             <p>{p.sku}</p>
                             <p>{p.name}</p>
                             <p>${p.price}</p>
-                            <p>${p.id}</p>
                             {p.size > 0 && <p>Size: {p.size} MB</p>}
                             {p.weight > 0 && <p>Weight: {p.weight}KG</p>}
                             {p.height > 0 && <p>Dimensions: {p.length}x{p.width}x{p.height}</p>}
